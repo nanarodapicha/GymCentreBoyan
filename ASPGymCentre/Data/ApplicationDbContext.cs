@@ -15,5 +15,6 @@ namespace ASPGymCentre.Data
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<Plan> Plans { get; set; }
+        public DbSet<ASPGymCentre.Models.PlanCategory> PlanCategory { get; set; } = default!;
     }
 }

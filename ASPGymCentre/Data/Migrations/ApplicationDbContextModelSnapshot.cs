@@ -176,10 +176,6 @@ namespace ASPGymCentre.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CategoryID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -192,18 +188,18 @@ namespace ASPGymCentre.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PlansCategoriesId")
+                    b.Property<int>("PlanCategoryID")
                         .HasColumnType("int");
 
-                    b.Property<double>("PriceSingleWorkout")
-                        .HasColumnType("float");
+                    b.Property<decimal>("PriceSingleWorkout")
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<DateTime>("RegisteredDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlansCategoriesId");
+                    b.HasIndex("PlanCategoryID");
 
                     b.ToTable("Plans");
                 });
@@ -416,7 +412,7 @@ namespace ASPGymCentre.Data.Migrations
                 {
                     b.HasOne("ASPGymCentre.Models.PlanCategory", "PlansCategories")
                         .WithMany("Plans")
-                        .HasForeignKey("PlansCategoriesId")
+                        .HasForeignKey("PlanCategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
