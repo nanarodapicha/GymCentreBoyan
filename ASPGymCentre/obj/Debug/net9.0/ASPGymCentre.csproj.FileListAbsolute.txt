@@ -1256,7 +1256,6 @@ C:\Users\User\Desktop\ASPGymCentre\ASPGymCentre\obj\Debug\net9.0\compressed\a3yg
 C:\Users\User\Desktop\ASPGymCentre\ASPGymCentre\obj\Debug\net9.0\compressed\nezrqnk58p-muycvpuwrr.gz
 C:\Users\User\Desktop\ASPGymCentre\ASPGymCentre\obj\Debug\net9.0\compressed\v0zgfp0y55-87fc7y1x7t.gz
 C:\Users\User\Desktop\ASPGymCentre\ASPGymCentre\obj\Debug\net9.0\compressed\yfc7ypekbg-mlv21k5csn.gz
-C:\Users\User\Desktop\ASPGymCentre\ASPGymCentre\obj\Debug\net9.0\compressed\etbhves51g-b9sayid5wm.gz
 C:\Users\User\Desktop\ASPGymCentre\ASPGymCentre\obj\Debug\net9.0\compressed\p7vwwrusjw-61n19gt1b8.gz
 C:\Users\User\Desktop\ASPGymCentre\ASPGymCentre\obj\Debug\net9.0\compressed\hieby9uoib-xtxxf3hu2r.gz
 C:\Users\User\Desktop\ASPGymCentre\ASPGymCentre\obj\Debug\net9.0\compressed\jbijlb3drb-bqjiyaj88i.gz
@@ -1328,3 +1327,4 @@ C:\Users\User\Desktop\ASPGymCentre\ASPGymCentre\obj\Debug\net9.0\staticwebassets
 C:\Users\User\Desktop\ASPGymCentre\ASPGymCentre\obj\Debug\net9.0\ASPGymCe.A867FF45.Up2Date
 C:\Users\User\Desktop\ASPGymCentre\ASPGymCentre\obj\Debug\net9.0\ASPGymCentre.genruntimeconfig.cache
 C:\Users\User\Desktop\ASPGymCentre\ASPGymCentre\obj\Debug\net9.0\ref\ASPGymCentre.dll
+C:\Users\User\Desktop\ASPGymCentre\ASPGymCentre\obj\Debug\net9.0\compressed\etbhves51g-tskfyskjcw.gz

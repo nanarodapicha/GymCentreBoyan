@@ -8,18 +8,20 @@ using Microsoft.EntityFrameworkCore;
 using ASPGymCentre.Data;
 using ASPGymCentre.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASPGymCentre.Controllers
 {
+    [Authorize]
     public class ReservationsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<Client> userManager;
+        private readonly UserManager<Client> _userManager;
 
         public ReservationsController(ApplicationDbContext context, UserManager<Client> userManager)
         {
             _context = context;
-            this.userManager = userManager;
+            this._userManager = userManager;
         }
 
         // GET: Reservations
@@ -81,9 +83,10 @@ namespace ASPGymCentre.Controllers
         // POST: Reservations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClientId,ExerciseId")] Reservation reservation)
+        public async Task<IActionResult> Create([Bind("ExerciseId")] Reservation reservation)
         {
             reservation.RegisteredDate = DateTime.Now;
+            reservation.ClientId = _userManager.GetUserId(User);
 
             if (ModelState.IsValid)
             {
@@ -138,7 +141,7 @@ namespace ASPGymCentre.Controllers
         // POST: Reservations/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClientId,ExerciseId,RegisteredDate")] Reservation reservation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ClientId,ExerciseId,")] Reservation reservation)
         {
             if (id != reservation.Id)
             {

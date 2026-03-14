@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +21,10 @@ namespace ASPGymCentre.Controllers
         // GET: Plans
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Plans.ToListAsync());
+            var applicationDbContext = _context.Plans
+                .Include(p => p.PlansCategories);
+
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Plans/Details/5
@@ -34,7 +36,9 @@ namespace ASPGymCentre.Controllers
             }
 
             var plan = await _context.Plans
+                .Include(p => p.PlansCategories)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (plan == null)
             {
                 return NotFound();
@@ -46,33 +50,25 @@ namespace ASPGymCentre.Controllers
         // GET: Plans/Create
         public IActionResult Create()
         {
-           
-
             ViewData["PlanCategoryID"] = new SelectList(_context.PlanCategory, "Id", "Name");
-            ViewData["PlanCategoryID"] = new SelectList(_context.Instructors, "Id", "Name");
-
             return View();
         }
 
         // POST: Plans/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,PlanCategoryID,Description,Image,PriceSingleWorkout")] Plan plan)
         {
-            plan.RegisteredDate = DateTime.Now;
-
             if (ModelState.IsValid)
             {
+                plan.RegisteredDate = DateTime.Now;
+
                 _context.Add(plan);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
             ViewData["PlanCategoryID"] = new SelectList(_context.PlanCategory, "Id", "Name", plan.PlanCategoryID);
-            ViewData["InstructorId"] = new SelectList(_context.Instructors, "Id", "Name");
-
             return View(plan);
         }
 
@@ -89,20 +85,31 @@ namespace ASPGymCentre.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["PlanCategoryID"] = new SelectList(_context.PlanCategory, "Id", "Name", plan.PlanCategoryID);
             return View(plan);
         }
 
         // POST: Plans/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CategoryID,Description,Image,PriceSingleWorkout,RegisteredDate")] Plan plan)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,PlanCategoryID,Description,Image,PriceSingleWorkout")] Plan plan)
         {
             if (id != plan.Id)
             {
                 return NotFound();
             }
+
+            var existingPlan = await _context.Plans
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (existingPlan == null)
+            {
+                return NotFound();
+            }
+
+            plan.RegisteredDate = existingPlan.RegisteredDate;
 
             if (ModelState.IsValid)
             {
@@ -122,8 +129,11 @@ namespace ASPGymCentre.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["PlanCategoryID"] = new SelectList(_context.PlanCategory, "Id", "Name", plan.PlanCategoryID);
             return View(plan);
         }
 
@@ -136,7 +146,9 @@ namespace ASPGymCentre.Controllers
             }
 
             var plan = await _context.Plans
+                .Include(p => p.PlansCategories)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (plan == null)
             {
                 return NotFound();

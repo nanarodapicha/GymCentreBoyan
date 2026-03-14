@@ -1,8 +1,50 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Начало";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="hero-section text-center">
+    <div class="hero-overlay">
+        <h1 class="display-3 fw-bold">ASPGymCentre</h1>
+        <p class="lead mt-3">
+            Система за управление на планове, тренировки, инструктори, клиенти и резервации.
+        </p>
+        <div class="mt-4">
+            <a class="btn btn-danger btn-lg me-2" asp-controller="Plans" asp-action="Index">Виж плановете</a>
+            <a class="btn btn-outline-light btn-lg" asp-controller="Exercises" asp-action="Index">Виж тренировките</a>
+        </div>
+    </div>
+</section>
+
+<section class="container mt-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card custom-card h-100 text-center">
+                <div class="card-body">
+                    <h3 class="card-title">Планове</h3>
+                    <p class="card-text">Разгледай всички тренировъчни планове и категории.</p>
+                    <a asp-controller="Plans" asp-action="Index" class="btn btn-danger">Отвори</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card custom-card h-100 text-center">
+                <div class="card-body">
+                    <h3 class="card-title">Инструктори</h3>
+                    <p class="card-text">Виж информация за всички инструктори в залата.</p>
+                    <a asp-controller="Instructors" asp-action="Index" class="btn btn-danger">Отвори</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card custom-card h-100 text-center">
+                <div class="card-body">
+                    <h3 class="card-title">Резервации</h3>
+                    <p class="card-text">Управлявай клиентски записвания за тренировки.</p>
+                    <a asp-controller="Reservations" asp-action="Index" class="btn btn-danger">Отвори</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

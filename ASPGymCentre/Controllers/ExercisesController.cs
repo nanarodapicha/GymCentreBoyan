@@ -58,23 +58,23 @@ namespace ASPGymCentre.Controllers
         }
 
         // POST: Exercises/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PlanId,Day,StartTime,EndTime,InstructorId")] Exercise exercise)
-        {
-            exercise.RegisteredDate = DateTime.Now;
-
-            if (ModelState.IsValid)
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> Create([Bind("Id,PlanId,Day,StartTime,EndTime,InstructorId")] Exercise exercise)
             {
-                _context.Add(exercise);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+                exercise.RegisteredDate = DateTime.Now;
 
-            ViewData["InstructorId"] = new SelectList(_context.Instructors, "Id", "Name", exercise.InstructorId);
-            ViewData["PlanId"] = new SelectList(_context.Plans, "Id", "Name", exercise.PlanId);
-            return View(exercise);
-        }
+                if (ModelState.IsValid)
+                {
+                    _context.Add(exercise);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
+                ViewData["InstructorId"] = new SelectList(_context.Instructors, "Id", "Name", exercise.InstructorId);
+                ViewData["PlanId"] = new SelectList(_context.Plans, "Id", "Name", exercise.PlanId);
+                return View(exercise);
+            }
 
         // GET: Exercises/Edit/5
         public async Task<IActionResult> Edit(int? id)
